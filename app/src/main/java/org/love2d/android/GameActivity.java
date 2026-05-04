@@ -60,6 +60,8 @@ public class GameActivity extends SDLActivity {
     private String[] args;
     private boolean isFused;
 
+    private DualScreenManager dualScreenManager;
+
     private static native void nativeSetDefaultStreamValues(int sampleRate, int framesPerBurst);
 
     @Override
@@ -119,6 +121,8 @@ public class GameActivity extends SDLActivity {
             attr.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_NEVER;
             shortEdgesMode = false;
         }
+
+        dualScreenManager = new DualScreenManager(this);
 
         if (delayedUri != null) {
             // This delayed fd is only sent if an embedded game is present.
@@ -414,6 +418,81 @@ public class GameActivity extends SDLActivity {
         }
 
         return map;
+    }
+
+    // Dual-screen bridge methods called from native C++ via JNI
+
+    @Keep
+    public int getDualScreenDisplayCount() {
+        if (dualScreenManager == null) return 1;
+        return dualScreenManager.getDisplayCount();
+    }
+
+    @Keep
+    public int getDualScreenTopWidth() {
+        if (dualScreenManager == null) return 0;
+        return dualScreenManager.getTopWidth();
+    }
+
+    @Keep
+    public int getDualScreenTopHeight() {
+        if (dualScreenManager == null) return 0;
+        return dualScreenManager.getTopHeight();
+    }
+
+    @Keep
+    public int getDualScreenBottomWidth() {
+        if (dualScreenManager == null) return 0;
+        return dualScreenManager.getBottomWidth();
+    }
+
+    @Keep
+    public int getDualScreenBottomHeight() {
+        if (dualScreenManager == null) return 0;
+        return dualScreenManager.getBottomHeight();
+    }
+
+    @Keep
+    public float getDualScreenTopRefreshRate() {
+        if (dualScreenManager == null) return 0f;
+        return dualScreenManager.getTopRefreshRate();
+    }
+
+    @Keep
+    public float getDualScreenBottomRefreshRate() {
+        if (dualScreenManager == null) return 0f;
+        return dualScreenManager.getBottomRefreshRate();
+    }
+
+    @Keep
+    public boolean initDualScreenSecondary() {
+        if (dualScreenManager == null) return false;
+        return dualScreenManager.initSecondary();
+    }
+
+    @Keep
+    public void deinitDualScreenSecondary() {
+        if (dualScreenManager != null) {
+            dualScreenManager.deinitSecondary();
+        }
+    }
+
+    @Keep
+    public android.view.Surface getDualScreenSecondarySurface() {
+        if (dualScreenManager == null) return null;
+        return dualScreenManager.getSecondarySurface();
+    }
+
+    @Keep
+    public int getDualScreenSecondarySurfaceWidth() {
+        if (dualScreenManager == null) return 0;
+        return dualScreenManager.getSecondarySurfaceWidth();
+    }
+
+    @Keep
+    public int getDualScreenSecondarySurfaceHeight() {
+        if (dualScreenManager == null) return 0;
+        return dualScreenManager.getSecondarySurfaceHeight();
     }
 
     private void processOpenGame(Uri game) {
