@@ -80,37 +80,37 @@ public class DualScreenManager {
     }
 
     @Keep
-    public int getTopWidth() {
-        Display primary = displayManager.getDisplay(Display.DEFAULT_DISPLAY);
-        return primary != null ? primary.getMode().getPhysicalWidth() : 0;
+    public int getMainWidth() {
+        Display defaultDisplay = displayManager.getDisplay(Display.DEFAULT_DISPLAY);
+        return defaultDisplay != null ? defaultDisplay.getMode().getPhysicalWidth() : 0;
     }
 
     @Keep
-    public int getTopHeight() {
-        Display primary = displayManager.getDisplay(Display.DEFAULT_DISPLAY);
-        return primary != null ? primary.getMode().getPhysicalHeight() : 0;
+    public int getMainHeight() {
+        Display defaultDisplay = displayManager.getDisplay(Display.DEFAULT_DISPLAY);
+        return defaultDisplay != null ? defaultDisplay.getMode().getPhysicalHeight() : 0;
     }
 
     @Keep
-    public int getBottomWidth() {
+    public int getExtWidth() {
         if (secondaryDisplay == null) return 0;
         return secondaryDisplay.getMode().getPhysicalWidth();
     }
 
     @Keep
-    public int getBottomHeight() {
+    public int getExtHeight() {
         if (secondaryDisplay == null) return 0;
         return secondaryDisplay.getMode().getPhysicalHeight();
     }
 
     @Keep
-    public float getTopRefreshRate() {
-        Display primary = displayManager.getDisplay(Display.DEFAULT_DISPLAY);
-        return primary != null ? primary.getRefreshRate() : 0f;
+    public float getMainRefreshRate() {
+        Display defaultDisplay = displayManager.getDisplay(Display.DEFAULT_DISPLAY);
+        return defaultDisplay != null ? defaultDisplay.getRefreshRate() : 0f;
     }
 
     @Keep
-    public float getBottomRefreshRate() {
+    public float getExtRefreshRate() {
         if (secondaryDisplay == null) return 0f;
         return secondaryDisplay.getRefreshRate();
     }
@@ -203,7 +203,7 @@ public class DualScreenManager {
         if (presentation != null) {
             return presentation.getSurfaceWidth();
         }
-        return getBottomWidth();
+        return getExtWidth();
     }
 
     @Keep
@@ -211,7 +211,7 @@ public class DualScreenManager {
         if (presentation != null) {
             return presentation.getSurfaceHeight();
         }
-        return getBottomHeight();
+        return getExtHeight();
     }
 
     @Keep

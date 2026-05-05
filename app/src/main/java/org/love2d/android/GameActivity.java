@@ -429,39 +429,39 @@ public class GameActivity extends SDLActivity {
     }
 
     @Keep
-    public int getDualScreenTopWidth() {
+    public int getDualScreenMainWidth() {
         if (dualScreenManager == null) return 0;
-        return dualScreenManager.getTopWidth();
+        return dualScreenManager.getMainWidth();
     }
 
     @Keep
-    public int getDualScreenTopHeight() {
+    public int getDualScreenMainHeight() {
         if (dualScreenManager == null) return 0;
-        return dualScreenManager.getTopHeight();
+        return dualScreenManager.getMainHeight();
     }
 
     @Keep
-    public int getDualScreenBottomWidth() {
+    public int getDualScreenExtWidth() {
         if (dualScreenManager == null) return 0;
-        return dualScreenManager.getBottomWidth();
+        return dualScreenManager.getExtWidth();
     }
 
     @Keep
-    public int getDualScreenBottomHeight() {
+    public int getDualScreenExtHeight() {
         if (dualScreenManager == null) return 0;
-        return dualScreenManager.getBottomHeight();
+        return dualScreenManager.getExtHeight();
     }
 
     @Keep
-    public float getDualScreenTopRefreshRate() {
+    public float getDualScreenMainRefreshRate() {
         if (dualScreenManager == null) return 0f;
-        return dualScreenManager.getTopRefreshRate();
+        return dualScreenManager.getMainRefreshRate();
     }
 
     @Keep
-    public float getDualScreenBottomRefreshRate() {
+    public float getDualScreenExtRefreshRate() {
         if (dualScreenManager == null) return 0f;
-        return dualScreenManager.getBottomRefreshRate();
+        return dualScreenManager.getExtRefreshRate();
     }
 
     @Keep
